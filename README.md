@@ -6,25 +6,25 @@
  <a href='https://arxiv.org/pdf/xxxx.xxxxx'><img src='https://img.shields.io/badge/arXiv-xxxx.xxxxx-b31b1b.svg'></a> &nbsp;
  <a href='https://huggingface.co/datasets/KwaiVGI/GameFactory-Dataset'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-blue'></a> &nbsp;
 
-**[Jiwen Yu<sup>1,2*</sup>](https://fuxiao0719.github.io/), 
-[Yiran Qin<sup>1*</sup>](https://alvinliu0.github.io/), <br>
-[Xintao Wang<sup>2&dagger;</sup>](https://xinntao.github.io/), 
+**[Jiwen Yu<sup>1*&dagger;</sup>](https://vvictoryuki.github.io/website/), 
+[Yiran Qin<sup>1*</sup>](https://github.com/IranQin), <br>
+[Xintao Wang<sup>2&ddagger;</sup>](https://xinntao.github.io/), 
 [Pengfei Wan<sup>2</sup>](https://scholar.google.com/citations?user=P6MraaYAAAAJ&hl=en),
 [Di Zhang<sup>2</sup>](https://openreview.net/profile?id=~Di_ZHANG3),
-[Xihui Liu<sup>1&dagger;</sup>](http://dahua.site/)** 
+[Xihui Liu<sup>1&ddagger;</sup>](https://xh-liu.github.io/)** 
 <br>
 <sup>1</sup>The University of Hong Kong
 <sup>2</sup>Kuaishou Technology
 <br>
-*: Equal Contribution, &dagger;: Corresponding Authors
+&dagger;: Intern at KwaiVGI, Kuaishou Technology, *: Equal Contribution, &ddagger;: Corresponding Authors
 
 </div>
 
 ## 📖 Introduction
 
 <div align="center">
-    <img src="./imgs/concept.jpg" alt="Schematic of our GameFactory creating new games based on pre-trained large video generation models." width="600"/>
-    <p style="font-style: italic; font-size: 90%; color: gray;">Schematic of our GameFactory creating new games based on pre-trained large video generation models.</p>
+    <img src="./imgs/concept.jpg" alt="Annotation process using MiniCPM-V" width="600"/>
+    <p><i>Schematic of our GameFactory creating new games based on pre-trained large video generation models.</i></p>
 </div>
 
 
@@ -49,7 +49,7 @@ To enhance diversity, we preconfigured three biomes (forest, plains, desert), th
 
 <div align="center">
     <img src="./imgs/annotation.jpg" alt="Annotation process using MiniCPM-V" width="600"/>
-    <p style="font-style: italic; font-size: 90%; color: gray;">An example of video clip annotation, where words describing scenes and objects are highlighted in red and bolded.</p>
+    <p><i>An example of video clip annotation, where words describing scenes and objects are highlighted in red and bolded.</i></p>
 </div>
 
 
@@ -98,6 +98,7 @@ GF-Minecraft
         ├── seed_3_part_3.mp4
         └── ...
 ```
+We have also placed a file `sample-10.zip`([link](https://huggingface.co/datasets/KwaiVGI/GameFactory-Dataset/blob/main/GF-Minecraft/sample-10.zip)) in the `GF-Minecraft/` directory, which contains 5 video files and their corresponding metadata from both `data_2003/` and `data_269/` folders. This can be used for quick reference of the file format.
 
 #### Directory Details
 
@@ -166,6 +167,45 @@ Other fields in the JSON file provide context for the actions:
 - **initial_weather**: Describes the weather condition at the start of the video (`clear`, `rain`, or `thunder`).
 - **start_time**: Indicates the time of day at the start of the video (`"Starting of a day"`, `"Noon, sun is at its peak"`, `"Sunset"`, `"Beginning of night"`, `"Midnight, moon is at its peak"`, `"Beginning of sunrise"`).
 
+### 4. Useful scripts
+#### Invalid Jump and Collision Detection
+The `detection.py` script processes all JSON files in the specified `metadata` directory to detect and mark collisions and invalid jumps. The updated JSON files are saved in a new `metadata-detection` directory.
+
+Run the script with the following command:
+
+```bash
+python detection.py --dir_name Your_Directory_Root
+```
+
+Ensure the directory specified in `--dir_name` contains the following subdirectories:
+- `video/`: Contains the video files.
+- `metadata/`: Contains the JSON files to be processed.
+
+#### Why Detect Invalid Jumps and Collisions?
+
+**Invalid Jumps**: During data collection, the agent sometimes receives a jump action for several consecutive frames. However, once the agent is in the air, the jump action becomes ineffective—this is what we call an "invalid jump." By detecting and removing these invalid jump actions in the metadata, we simplify the learning process for the model by ensuring it only processes valid and meaningful actions.
+
+**Collisions**: Collision detection provides additional information about the agent's interaction with the environment. Collisions, such as the agent hitting a wall or an obstacle, can be treated as a unique action signal. Incorporating this information into the metadata helps the model better understand environmental constraints and improves its ability to learn action dynamics. Of course, it is also possible to not provide this information and let the network learn it by itself.
+
+#### Action Visualization
+
+The provided script `visualize.py` allows users to annotate input videos with action information and save the output as an annotated video. Simply run the script directly to execute the visualization process:
+
+```bash
+python visualize.py
+```
+
+The script uses a predefined action format, where actions are described as a list of entries. Each entry includes:
+- A frame range for which the action is active.
+- A string encoding the specific action details.
+- Optionally, a list of specific frames where the space key (jump) is pressed.
+
+For example `[[25, "0 0 0 0 0 0 0 0 0.5"], [77, "1 0 0 0 0 0 0 0 0"], "15 30 50"]`:
+- `[25, "0 0 0 0 0 0 0 0 0.5"]` indicates an action lasting until frame 25 with specific movement and control states.
+- `[77, "1 0 0 0 0 0 0 0 0"]` specifies a new action starting from frame 26 and lasting until frame 77.
+- `"15 30 50"` lists the frames where the space key (jump) is pressed, such as frames 15, 30, and 50.
+
+The action string consists of `"w s a d shift ctrl collision delta_pitch delta_yaw"`
 
 
 ## 🌟 Citation
