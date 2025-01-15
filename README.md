@@ -3,7 +3,7 @@
 <img src='./imgs/logo.png' style="height:120px"></img>
 
  <a href='https://vvictoryuki.github.io/gamefactory'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp;
- <a href='https://arxiv.org/pdf/xxxx.xxxxx'><img src='https://img.shields.io/badge/arXiv-xxxx.xxxxx-b31b1b.svg'></a> &nbsp;
+ <a href='https://arxiv.org/abs/2501.08325'><img src='https://img.shields.io/badge/arXiv-2501.08325-b31b1b.svg'></a> &nbsp;
  <a href='https://huggingface.co/datasets/KwaiVGI/GameFactory-Dataset'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-blue'></a> &nbsp;
 
 **[Jiwen Yu<sup>1*&dagger;</sup>](https://vvictoryuki.github.io/website/), 
@@ -215,7 +215,7 @@ Please leave us a star 🌟 and cite our paper if you find our work helpful.
       title={GameFactory: Creating New Games with Generative Interactive Videos}, 
       author={Yu, Jiwen and Qin, Yiran and Wang, Xintao and Wan, Pengfei and Zhang, Di and Liu, Xihui},
       year={2025},
-      eprint={xxxxxxxx},
+      eprint={2501.08325},
       archivePrefix={arXiv},
 }
 ```
