@@ -2,11 +2,11 @@
 <div align="center">
 <img src='./imgs/logo.png' style="height:120px"></img>
 
- <a href='https://vvictoryuki.github.io/gamefactory'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp;
+ <a href='https://yujiwen.github.io/gamefactory/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp;
  <a href='https://arxiv.org/abs/2501.08325'><img src='https://img.shields.io/badge/arXiv-2501.08325-b31b1b.svg'></a> &nbsp;
  <a href='https://huggingface.co/datasets/KwaiVGI/GameFactory-Dataset'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-blue'></a> &nbsp;
 
-**[Jiwen Yu<sup>1*&dagger;</sup>](https://vvictoryuki.github.io/website/), 
+**[Jiwen Yu<sup>1*&dagger;</sup>](https://yujiwen.github.io/), 
 [Yiran Qin<sup>1*</sup>](https://github.com/IranQin), <br>
 [Xintao Wang<sup>2&ddagger;</sup>](https://xinntao.github.io/), 
 [Pengfei Wan<sup>2</sup>](https://scholar.google.com/citations?user=P6MraaYAAAAJ&hl=en),
